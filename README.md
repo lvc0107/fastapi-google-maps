@@ -21,4 +21,17 @@ In each step use a corresponding git branch (Use ssh).
 10) Introduce K8
 11) Split in microservices for each cloud provider
 12) Introduce a new microservice which use pandas, and LLM libraries like pytorch, 
-13) 
+
+
+# steps
+# pip install poetry
+# pip install pyenv
+# pyenv install 3.13
+# pyenv versions
+# python global 3.13.1
+# poetry env use python3.13
+# poetry shell
+# ln -s /Users/luisvargas/Library/Caches/pypoetry/virtualenvs/fastapi-google-maps-42h-QzWA-py3.13 venv
+# source venv/bin/activate
+# ./build.sh
+
