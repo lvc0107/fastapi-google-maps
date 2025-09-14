@@ -1,0 +1,6 @@
+[flake8]
+# E501: Line too long disabled, black will handle this
+# W503: Line break ocurred after binary operator. Incompatibility between black and flake8
+# F722: Forward annotation syntax error. https://github.com/PyCQA/pyflakes/issues/542
+ignore = E501, W503, F722
+exclude = *venv
