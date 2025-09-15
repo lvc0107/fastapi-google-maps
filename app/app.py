@@ -80,7 +80,7 @@ def create_app():
     def validation_error_handler(request: Request, exception: RequestValidationError):
         return validation_exception_handler(request, exception)
 
-    #for router in ROUTERS:
-        #app.include_router(router)
+    for router in ROUTERS:
+        app.include_router(router)
 
     return app
