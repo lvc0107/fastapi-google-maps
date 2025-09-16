@@ -8,14 +8,14 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
 from app.apis import (
-    hello_world_router,
+    google_maps_api_router,
 )
 #from app.app_info import get_version
 #from app.healthcheck import register_healthcheck
 from app.settings import settings
 
 ROUTERS = [
-hello_world_router
+google_maps_api_router
 ]
 
 

@@ -1,5 +1,5 @@
-from app.apis.app import router as hello_world_router
+from app.apis.google_maps_api import router as google_maps_api_router
 
 __all__ = [
-    "hello_world_router",
+    "google_maps_api_router",
 ]
