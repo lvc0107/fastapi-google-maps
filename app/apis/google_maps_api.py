@@ -1,5 +1,6 @@
 import httpx
 from fastapi import APIRouter, Query
+from app.logging import logger
 
 
 router = APIRouter(prefix="/maps", tags=["maps-api"])
@@ -19,10 +20,14 @@ BASE_URL = "https://api.unsplash.com/photos/random"
 
 @router.get("/image")
 async def get_image(query: str = Query("nature")):
+
+    logger.info("image_search_start", query=query)
     params = {"query": query, "client_id": UNSPLASH_ACCESS_KEY}
     async with httpx.AsyncClient() as client:
         res = await client.get(BASE_URL, params=params)
         data = res.json()
+    logger.info("Data retrieved", data=data)
+
     return {
         "author": data["user"]["name"],
         "image_url": data["urls"]["regular"]
