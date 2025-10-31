@@ -1,22 +1,21 @@
 import traceback
-from contextlib import AsyncExitStack, asynccontextmanager
+from contextlib import asynccontextmanager
 
-from aiobotocore.session import AioSession
+import httpx
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
 from app.apis import (
-    google_maps_api_router,
+    images_api_router,
 )
-#from app.app_info import get_version
-#from app.healthcheck import register_healthcheck
+
+# from app.app_info import get_version
+# from app.healthcheck import register_healthcheck
 from app.settings import settings
 
-ROUTERS = [
-google_maps_api_router
-]
+ROUTERS = [images_api_router]
 
 
 def general_exception_handler(request, exception):  # NOSONAR
@@ -41,8 +40,13 @@ def validation_exception_handler(request: Request, exc: RequestValidationError):
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    exit_stack = AsyncExitStack()
+    app.state.http_client = httpx.AsyncClient()
+    print("✅ HTTP client started")
+    yield
+    await app.state.http_client.aclose()
+    print("🧹 HTTP client closed")
     """
+    exit_stack = AsyncExitStack()
     region_name = settings.AWS.AWS_REGION_NAME
     session = AioSession()
     s3_client = await exit_stack.enter_async_context(
@@ -53,24 +57,23 @@ async def lifespan(app: FastAPI):
     )
     #settings.AWS.SERVICES[settings.AWS.S3_CLIENT] = s3_client
     #settings.AWS.SERVICES[settings.AWS.SQS_CLIENT] = sqs_client
+    #  await exit_stack.aclose()
     """
-    yield
-    await exit_stack.aclose()
 
 
 def create_app():
     app = FastAPI(
-        #root_path=settings.prefix_path,
+        # root_path=settings.prefix_path,
         title="Test app",
         description="Description of app's responsibilities",
-        #version=get_version(),
-        #debug=settings.debug,
+        # version=get_version(),
+        debug=settings.debug,
         openapi_url="/openapi.json",
         docs_url="/documentation",
         lifespan=lifespan,
     )
 
-    #register_healthcheck(app)
+    # register_healthcheck(app)
 
     @app.exception_handler(Exception)
     def default_error_handler(request: Request, exception):  # NOSONAR

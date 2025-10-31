@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "fastapi-google-maps"
+name = "images_project"
 version = "0.1.0"
-description = "FastAPI app that consumes Google Maps public APIs (Geocoding, Places, Directions)."
-authors = ["Tu Nombre <tu_email@ejemplo.com>"]
+description = "Testing FastAPI app that consumes Images from UNSPLASH."
+authors = ["Migue Vargas <lvc0107@proton.me>"]
 readme = "README.md"
 license = "MIT"
 packages = [{ include = "app" }]
@@ -12,7 +12,7 @@ python = "^3.12"
 fastapi = "^0.101.1"
 uvicorn = {extras = ["standard"], version = "^0.22.0"}
 httpx = "^0.24.1"
-pydantic = "^1.10.12"
+pydantic = "2.12.3"
 python-dotenv = "^1.0.0"
 cachetools = "^5.4.0"
 sqlalchemy = "^2.0.21"
@@ -21,6 +21,7 @@ asyncpg = "^0.30.0"
 psycopg2-binary = "^2.9.7"
 aioboto3 = "^13.1.1"
 Pygments  = "2.19.2"
+structlog = "25.5.0"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.5.0"
