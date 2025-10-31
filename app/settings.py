@@ -2,7 +2,7 @@ from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from images_project import ROOT_DIR
+from app import ROOT_DIR
 
 
 class ImagesSettings(BaseSettings):
