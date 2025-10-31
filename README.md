@@ -81,7 +81,10 @@ Each step should be developed in a dedicated **git branch** (use SSH).
 
 ### 9. Deployment
 - Deploy the application with cloud-native practices.
-
+- CI
+- gitlab
+- Jenkins
+- github Actions
 ---
 
 ### 10. Kubernetes
@@ -123,6 +126,18 @@ poetry shell
 # ln -s /PATH_TO/Caches/pypoetry/virtualenvs/VIRTUAL_ENV_NAME venv
 # source venv/bin/activate
 # ./build.sh
-
 # poetry show (after .poetry lock is created)
 
+
+#####
+
+python server.py
+# in browser go to
+http://127.0.0.1:8000/documentation
+http://127.0.0.1:8000/gmaps/
+http://127.0.0.1:8000/gmaps/items/5?q=somequery3
+http://127.0.0.1:8000/gmaps/geocode?address=Obelisco%20Buenos%20Aires
+
+http://localhost:8000/gmaps/geocode?address=Obelisco%20Buenos%20Aires
+
+https://console.cloud.google.com/apis/dashboard?project=primeval-rune-472300-j4
