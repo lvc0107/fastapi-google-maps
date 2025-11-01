@@ -125,10 +125,13 @@ poetry shell
 # Link Poetry virtualenv
 # ln -s /PATH_TO/Caches/pypoetry/virtualenvs/VIRTUAL_ENV_NAME venv
 # source venv/bin/activate
+# buildin locally
 # ./build.sh
 # poetry show (after .poetry lock is created)
 
-
+###
+Building  & running with with docker
+docker compose up --build
 #####
 
 python server.py

@@ -1,8 +1,9 @@
+import json
 import logging
 import os
+
 import structlog
-import json
-from pygments import highlight, lexers, formatters
+from pygments import formatters, highlight, lexers
 
 ENV = os.getenv("ENV", "dev")
 
@@ -11,14 +12,14 @@ logging.basicConfig(
     level=logging.INFO,
 )
 
+
 # 👇 Custom renderer for pretty, colored JSON output in console
 def pretty_console_json_renderer(_, __, event_dict):
     """Render JSON logs with indentation and colors for console."""
     formatted_json = json.dumps(event_dict, indent=2, ensure_ascii=False)
-    colorful_json = highlight(
-        formatted_json, lexers.JsonLexer(), formatters.TerminalFormatter()
-    )
+    colorful_json = highlight(formatted_json, lexers.JsonLexer(), formatters.TerminalFormatter())
     return colorful_json.strip()
+
 
 # 👇 Choose format depending on environment
 if ENV == "prod":
