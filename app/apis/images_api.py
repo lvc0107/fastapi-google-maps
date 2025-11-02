@@ -3,12 +3,10 @@ from fastapi import APIRouter, HTTPException, Path, Query
 
 from app.logging import logger
 
-router = APIRouter(prefix="/maps", tags=["maps-api"])
+# from app.services.image_services import ImageService
+from app.settings import settings
 
-UNSPLASH_APP_ID = "823914"
-UNSPLASH_ACCESS_KEY = "rfeKBGixCyKXU9mM2ZPoGNYSKUnTLTkFvJqWndz3AuI"
-UNSPLASH_SECRET_KEY = "V28mg5c0Y57cK8NC5PYXJOGea2msvSnJgO4mgeHfBDE"
-BASE_URL = "https://api.unsplash.com/photos/random"
+router = APIRouter(prefix="/maps", tags=["maps-api"])
 
 
 @router.get("/image/{count}")
@@ -21,10 +19,11 @@ async def get_image(
     """
     logger.info("image_search_start", query=query, count=count)
 
-    params = {"query": query, "count": count, "client_id": UNSPLASH_ACCESS_KEY}
+    params = {"query": query, "count": count, "client_id": settings.unsplash_access_key}
 
     async with httpx.AsyncClient() as client:
-        res = await client.get(BASE_URL, params=params)
+        logger.info(f"URL >>: {settings.unsplash_base_url}")
+        res = await client.get(settings.unsplash_base_url, params=params)
 
     if res.status_code != 200:
         logger.error("unsplash_error", status=res.status_code, body=res.text)
@@ -32,6 +31,7 @@ async def get_image(
 
     data = res.json()
     logger.info("data_retrieved", data=data)
+    # ImageService().save_image_to_db(ImageInfo(**data))
 
     # If count > 1, Unsplash returns a list; handle both cases
     if isinstance(data, list):

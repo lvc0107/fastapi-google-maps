@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from app import ROOT_DIR
@@ -10,8 +11,11 @@ class ImagesSettings(BaseSettings):
 
 
 class Settings(ImagesSettings):
-    database_url: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/mapsdb"
-    prefix_path: str = ""
+    unsplash_access_key: str = Field(
+        validation_alias="UNSPLASH_ACCESS_KEY", default="default-access-key"
+    )
+    unsplash_base_url: str = Field(validation_alias="UNSPLASH_BASE_URL", default="base-url")
+    database_url: str = Field(validation_alias="DATABASE_URL", default="db_url")
     debug: int = 1
 
 

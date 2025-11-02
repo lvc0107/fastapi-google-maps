@@ -7,6 +7,7 @@ poetry install
 info_message "Installing pre-commit"
 pre-commit install
 pre-commit install --hook-type commit-msg
+pre-commit run --all-files
 
 
 info_message "Checking unused steps"

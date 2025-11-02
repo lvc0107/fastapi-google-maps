@@ -8,18 +8,19 @@ Each step should be developed in a dedicated **git branch** (use SSH).
 ## 📌 Steps
 
 ### 1. FastAPI App
-- Develop a **FastAPI** application consuming endpoints from the **Google Maps Public API**.
+- Develop a **FastAPI** application consuming endpoints from the **UNSPLASH Images Public API**.
 - Requirements:
   - Pre-commits
-  - `pyenv` (Python 3.13)
-  - Poetry
+  - `pyenv` (Python 3.14)
+  - Poetry /uv
   - Virtual environments
   - Ruff, Bandit
   - `build.sh` script for local build
-  - Swagger documentation
+  - OpenAPI documentation
   - Document chosen **design patterns**
   - Use advanced Python features:
     - Decorators
+    - Generators /Corutines
     - List comprehensions
     - Context managers
     - Memory optimizations (cache, generators, replacing loops with O(1) solutions where possible)
@@ -29,13 +30,12 @@ Each step should be developed in a dedicated **git branch** (use SSH).
 ### 2. Testing & CI
 - Add **unit and system tests**.
 - Use **Wiremock** for mocking external APIs.
-- Automation with **GitHub Actions** (consider introducing Jenkins + GitHub Actions).
-
 ---
 
 ### 3. Dockerization
 - Dockerize with **2 stages**: build and run.
 - Automate builds with **GitHub Actions**.
+- Docker compose
 
 ---
 
@@ -64,7 +64,7 @@ Each step should be developed in a dedicated **git branch** (use SSH).
 
 ### 7. Authentication
 - Add **OpenID Connect authentication**.
-- Support providers: **Facebook, Google, GitHub**.
+- Support 3rd party providers: **Facebook, Google, GitHub**.
 
 ---
 
@@ -74,7 +74,7 @@ Each step should be developed in a dedicated **git branch** (use SSH).
   - Azure
   - Google Cloud
 - Use services:
-  - AWS: S3, SQS, SNS, DynamoDB, Cognito
+  - AWS: S3, SQS, SNS, DynamoDB, Cognito, Lambda
   - Azure & GCP: equivalent services
 
 ---
@@ -132,15 +132,13 @@ poetry shell
 ###
 Building  & running with with docker
 docker compose up --build
+docker compose up  # just to run
 #####
 
 python server.py
 # in browser go to
 http://127.0.0.1:8000/documentation
-http://127.0.0.1:8000/gmaps/
-http://127.0.0.1:8000/gmaps/items/5?q=somequery3
-http://127.0.0.1:8000/gmaps/geocode?address=Obelisco%20Buenos%20Aires
+http://127.0.0.1:8000/maps/image/3
 
-http://localhost:8000/gmaps/geocode?address=Obelisco%20Buenos%20Aires
 
-https://console.cloud.google.com/apis/dashboard?project=primeval-rune-472300-j4
+curl "https://api.unsplash.com/photos/random?query=mountain&client_id=<ACCESS_KEY>"
