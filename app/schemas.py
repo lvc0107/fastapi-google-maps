@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import List
 
 from pydantic import BaseModel, HttpUrl
 
@@ -13,7 +12,7 @@ class AlternativeSlugs(BaseModel):
     ko: str | None = None
     de: str | None = None
     pt: str | None = None
-    id: str | None = None
+    id_country: str | None = None
 
 
 class Urls(BaseModel):
@@ -141,13 +140,13 @@ class ImageInfo(BaseModel):
     blur_hash: str | None = None
     description: str | None = None
     alt_description: str | None = None
-    breadcrumbs: List = []
+    breadcrumbs: list = []
     urls: Urls
     links: Links
     likes: int
     liked_by_user: bool
     bookmarked: bool
-    current_user_collections: List = []
+    current_user_collections: list = []
     sponsorship: dict | None = None
     topic_submissions: TopicSubmissions
     asset_type: str
@@ -156,7 +155,7 @@ class ImageInfo(BaseModel):
     location: Location
     meta: Meta
     public_domain: bool
-    tags: List[Tag]
+    tags: list[Tag]
     views: int
     downloads: int
-    topics: List[Topic]
+    topics: list[Topic]
